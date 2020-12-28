@@ -30,7 +30,7 @@
         console.log(url);
         const subUrl = url.substring(url.indexOf("?") + 1);
         console.log(subUrl);
-        helpers.simpleHttpRequest("http://customer:8080/Customer-1.0/api-v1/customers/abcd", req.body, res, next);
+        helpers.simpleHttpRequest("http://customer:8080/Customer-1.0/api-v1/customers/abcd", res, next);
     });
 
     module.exports = app;
