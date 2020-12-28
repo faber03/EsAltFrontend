@@ -15,7 +15,7 @@
         helpers.simpleHttpRequest(endpoints.customerUrl + op + subUrl, res, next);
     });*/
     
-    app.get("/bank/customers", function (req, res, next) {
+    app.post("/bank/customers", function (req, res, next) {
         const op = 'customers';
         const url = req.url.toString();
         console.log(url);
