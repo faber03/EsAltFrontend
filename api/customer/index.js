@@ -21,7 +21,7 @@
         console.log(url);
         const subUrl = url.substring(url.indexOf("?") + 1);
         console.log(subUrl);
-        helpers.httpPost("http://customer:8080/Customer-1.0/api-v1/customers", res, next);
+        helpers.httpPost("http://customer:8080/Customer-1.0/api-v1/customers", req.body, res, next);
     });
 
     module.exports = app;

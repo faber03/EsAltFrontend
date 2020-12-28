@@ -83,8 +83,8 @@
         }.bind({res: res}));
     }
     
-    helpers.httpPost = function(url, res, next) {
-        request.post(url, function(error, response, body) {
+    helpers.httpPost = function(url, body, res, next) {
+        request.post(url, body, function(error, response, body) {
             if (error) return next(error);
             helpers.respondSuccessBody(res, body);
         }.bind({res: res}));
