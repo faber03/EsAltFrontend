@@ -82,6 +82,13 @@
             helpers.respondSuccessBody(res, body);
         }.bind({res: res}));
     }
+    
+    helpers.httpPost = function(url, res, next) {
+        request.post(url, function(error, response, body) {
+            if (error) return next(error);
+            helpers.respondSuccessBody(res, body);
+        }.bind({res: res}));
+    }
 
     /* TODO: Add documentation */
     helpers.getCustomerId = function(req, env) {
