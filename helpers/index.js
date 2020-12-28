@@ -83,14 +83,14 @@
         }.bind({res: res}));
     }
     
-    /*helpers.httpPost = function(url, body, res, next) {
-        request.post(url, body, function(error, response, body) {
+    helpers.httpPost = function(url, data, res, next) {
+        request.post(url, data, function(error, response, body) {
             if (error) return next(error);
             helpers.respondSuccessBody(res, body);
         }.bind({res: res}));
-    }*/
+    }
     
-    helpers.httpPost = function(url, res, next) {
+    /*helpers.httpPost = function(url, res, next) {
         request.post(url, 
 		{
 		  json:
@@ -104,7 +104,7 @@
             if (error) return next(error);
             helpers.respondSuccessBody(res, body);
         }.bind({res: res}));
-    }
+    }*/
 
     /* TODO: Add documentation */
     helpers.getCustomerId = function(req, env) {
