@@ -83,11 +83,17 @@
         }.bind({res: res}));
     }
     
-    helpers.httpPost = function(url, data, res, next) {
-        request.post(url, data, function(error, response, body) {
-            if (error) return next(error);
-            helpers.respondSuccessBody(res, body);
-        }.bind({res: res}));
+    helpers.httpPost = function(url, options, res, next) {
+        request.post(
+    		url, 
+    		options, 
+    		function(error, response, body) 
+    		{
+    			if (error) 
+    				return next(error);
+    			helpers.respondStatus(res, response.statusCode);
+    		}
+    		.bind({res: res}));
     }
     
     /*helpers.httpPost = function(url, res, next) {
