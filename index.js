@@ -16,8 +16,8 @@ app.use(helpers.sessionMiddleware);
 app.use(morgan("dev", {}));
 
 /* Mount API endpoints */
-app.use(customer);
-app.use(account);
+app.use("/api-v1", customer);
+app.use("/api-v1", account);
 
 app.use(helpers.errorHandler);
 
