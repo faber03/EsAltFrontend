@@ -136,7 +136,7 @@
     helpers.fillResponse = function(res, statusCode, resourcePath, location, body) {
 
         if(location != null)
-            res.location(resourcePath +
+            res.location(resourcePath + "/" +
                 location.substring(location.lastIndexOf("/") + 1));
 
         res.writeHeader(statusCode);
