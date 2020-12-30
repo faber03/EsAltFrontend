@@ -113,7 +113,7 @@
     		{
     			if (error) 
     				return next(error);
-                helpers.fillResponse(res, response.statusCode, resourcePath, location, body);
+                helpers.fillResponse(res, response.statusCode, resourcePath, response.headers.location, body);
     		}
     		.bind({res: res}));
     }
