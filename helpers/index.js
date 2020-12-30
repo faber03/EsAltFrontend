@@ -50,6 +50,13 @@
         res.writeHeader(statusCode);
         res.end();
     }
+    
+    /* Responds with the given statusCode and location*/
+    helpers.respondStatusLocation = function(res, statusCode, location) {
+    	res.location(location);
+        res.writeHeader(statusCode);        
+        res.end();
+    }
 
     /* Rewrites and redirects any url that doesn't end with a slash. */
     helpers.rewriteSlash = function(req, res, next) {
@@ -82,8 +89,23 @@
             helpers.respondSuccessBody(res, body);
         }.bind({res: res}));
     }
+
+
+    helpers.httpGet = function(url, res, next) {
+        request.get(
+            url,
+            function(error, response, body)
+            {
+                if (error) return next(error);
+
+                helpers.fillResponse(res, response.statusCode, response.headers.location, null, body);
+
+                //helpers.respondSuccessBody(res, body);
+            }
+            .bind({res: res}));
+    }
     
-    helpers.httpPost = function(url, options, res, next) {
+    helpers.httpPost = function(url, options, resourcePath, res, next) {
         request.post(
     		url, 
     		options, 
@@ -91,9 +113,38 @@
     		{
     			if (error) 
     				return next(error);
-    			helpers.respondStatus(res, response.statusCode);
+                helpers.fillResponse(res, response.statusCode, resourcePath, location, body);
     		}
     		.bind({res: res}));
+    }
+
+    helpers.httpPut = function(url, options, resourcePath, res, next) {
+        request.put(
+            url,
+            options,
+            function(error, response, body)
+            {
+                if (error)
+                    return next(error);
+
+                helpers.fillResponse(res, response.statusCode, resourcePath, response.headers.location, body);
+
+            }
+                .bind({res: res}));
+    }
+
+    helpers.fillResponse = function(res, statusCode, resourcePath, location, body) {
+
+        if(location != null)
+            res.location(resourcePath +
+                location.substring(location.lastIndexOf("/") + 1));
+
+        res.writeHeader(statusCode);
+
+        if(body != null)
+            res.write(body);
+
+        res.end();
     }
     
     /*helpers.httpPost = function(url, res, next) {

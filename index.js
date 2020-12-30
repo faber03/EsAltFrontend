@@ -11,6 +11,7 @@ app.use(helpers.rewriteSlash);
 app.use(express.static("public"));
 
 app.use(bodyParser.json());
+app.use(bodyParser.text());
 app.use(cookieParser());
 app.use(helpers.sessionMiddleware);
 app.use(morgan("dev", {}));
